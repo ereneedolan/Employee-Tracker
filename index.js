@@ -20,25 +20,25 @@ const employeeDirectory = ()=>{
     }])
     .then (function(data){
         // if statements where check what user picked and run function that correlates with it
-        if(choice === "View All Employees"){
+        if(data.choice === "View All Employees"){
             viewAllEmployees()
         }
-        else if (choice === "Add Employee"){
+        else if (data.choice === "Add Employee"){
             addEmployee()
         }
-        else if (choice === "Update Employee Role"){
+        else if (data.choice === "Update Employee Role"){
 
         }
-        else if (choice === "View All Roles"){
+        else if (data.choice === "View All Roles"){
             viewAllRoles()
         }
-        else if (choice === "Add Role"){
+        else if (data.choice === "Add Role"){
             addRole()
         }
         else if (choice === "View All Departments"){
             viewAllDepartments()
         }
-        else if (choice === "Add Department"){
+        else if (data.choice === "Add Department"){
             addDepartmet()
         }
         else 
