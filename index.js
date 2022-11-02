@@ -1,6 +1,5 @@
 const inquirer = require('inquirer');
 require("console.table")
-
 const mysql = require('mysql2');
 
 const employeeDirectory = ()=>{
@@ -20,6 +19,30 @@ const employeeDirectory = ()=>{
           ]
     }])
     .then (function(data){
+        // if statements where check what user picked and run function that correlates with it
+        if(choice === "View All Employees"){
+            viewAllEmployees()
+        }
+        else if (choice === "Add Employee"){
+            addEmployee()
+        }
+        else if (choice === "Update Employee Role"){
+
+        }
+        else if (choice === "View All Roles"){
+            viewAllRoles()
+        }
+        else if (choice === "Add Role"){
+            addRole()
+        }
+        else if (choice === "View All Departments"){
+            viewAllDepartments()
+        }
+        else if (choice === "Add Department"){
+            addDepartmet()
+        }
+        else 
+
         console.log(data)
     })
 }
@@ -44,7 +67,6 @@ const viewAllEmployees = ()=>{
 }
 
 const addEmployee = ()=>{
-
 inquirer
   .prompt([
     {
@@ -83,29 +105,32 @@ const viewAllRoles = ()=>{
     })
 }
 
+const addRole = ()=>{
 inquirer
   .prompt([
     {
       type: 'input',
-      message: `What?`,
-      name: 'name',
+      message: `What is the role title?`,
+      name: 'role_title',
     },
     {
       type: 'input',
-      message: `What is their email address?`,
-      name: 'email',
+      message: `What is the role salary?`,
+      name: 'role_salary',
     },
     {
       type: 'input',
-      message: `What is their ID number?`,
-      name: 'id',
-    },
-    {
-      type: 'choice',
-      message: `What is their office number?`,
-      name: 'officeNumber',
+      message: `What is the role's department id?`,
+      name: 'department_id',
     },
 ])
+.then (function({role_title, role_salary, department_id}){
+    db.query("INSERT into role values (?,?,?)",[role_title, role_salary, department_id], function(err, result){
+        if(err) throw err
+        console.table(result)
+        })
+    })
+ }
 
 const viewAllDepartments = ()=>{
     db.query("SELECT * from department", function(err, result){
@@ -114,26 +139,19 @@ const viewAllDepartments = ()=>{
     })
 }
 
+const addDepartment = ()=>{
 inquirer
   .prompt([
     {
       type: 'input',
-      message: `What?`,
-      name: 'name',
-    },
-    {
-      type: 'input',
-      message: `What is their email address?`,
-      name: 'email',
-    },
-    {
-      type: 'input',
-      message: `What is their ID number?`,
-      name: 'id',
-    },
-    {
-      type: 'choice',
-      message: `What is their office number?`,
-      name: 'officeNumber',
+      message: `What is the department name?`,
+      name: 'department_name',
     },
 ])
+.then (function({department_name}){
+    db.query("INSERT into department values (?)",[department_name], function(err, result){
+        if(err) throw err
+        console.table(result)
+        })
+    })
+}
