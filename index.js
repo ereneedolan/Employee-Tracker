@@ -27,7 +27,7 @@ const employeeDirectory = ()=>{
             addEmployee()
         }
         else if (data.choice === "Update Employee Role"){
-
+            updateEmployeeRole()
         }
         else if (data.choice === "View All Roles"){
             viewAllRoles()
@@ -96,6 +96,12 @@ inquirer
         console.table(result)
     })
 })
+}
+const updateEmployeeRole = ()=>{
+    db.query("UPDATE employee SET = ? WHERE id = ?;", function(err, result){
+        if(err) throw err
+        console.table(result)
+    })
 }
 
 const viewAllRoles = ()=>{
