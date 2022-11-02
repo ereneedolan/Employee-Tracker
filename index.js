@@ -91,7 +91,7 @@ inquirer
     },
 ])
 .then (function({first_name, last_name, role_id, manager_id}){
-    db.query("INSERT into employee values (?,?,?,?)",[first_name, last_name, role_id, manager_id], function(err, result){
+    db.query("INSERT INTO employee VALUES(?,?,?,?)",[first_name, last_name, role_id, manager_id], function(err, result){
         if(err) throw err
         console.table(result)
     })
@@ -125,7 +125,7 @@ inquirer
     },
 ])
 .then (function({role_title, role_salary, department_id}){
-    db.query("INSERT into role values (?,?,?)",[role_title, role_salary, department_id], function(err, result){
+    db.query("INSERT INTO role VALUES(?,?,?)",[role_title, role_salary, department_id], function(err, result){
         if(err) throw err
         console.table(result)
         })
@@ -149,7 +149,7 @@ inquirer
     },
 ])
 .then (function({department_name}){
-    db.query("INSERT into department values (?)",[department_name], function(err, result){
+    db.query("INSERT INTO department VALUES(?)",[department_name], function(err, result){
         if(err) throw err
         console.table(result)
         })
