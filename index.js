@@ -96,7 +96,7 @@ inquirer
 .then (function({first_name, last_name, role_id, manager_id}){
     db.query("INSERT INTO employees (first_name, last_name, role_id, manager_id) VALUES (?,?,?,?);",[first_name, last_name, role_id, manager_id], function(err, result){
         if(err) throw err
-        console.log("Added New Eemployee")
+        console.log("Added New Employee")
         employeeDirectory()
     })
 })
