@@ -19,6 +19,7 @@ const employeeDirectory = ()=>{
           ]
     }])
     .then (function(data){
+        console.log(data)
         // if statements where check what user picked and run function that correlates with it
         if(data.choice === "View All Employees"){
             viewAllEmployees()
@@ -60,9 +61,10 @@ const db = mysql.createConnection(
 );
 
 const viewAllEmployees = ()=>{
-    db.query("SELECT * from employee", function(err, result){
+    db.query("SELECT * from employees", function(err, result){
         if(err) throw err
         console.table(result)
+    employeeDirectory()
     })
 }
 
@@ -89,25 +91,47 @@ inquirer
         message: `What is their manager ID number?`,
         name: 'manager_id',
     },
+    
 ])
 .then (function({first_name, last_name, role_id, manager_id}){
-    db.query("INSERT INTO employee VALUES(?,?,?,?)",[first_name, last_name, role_id, manager_id], function(err, result){
+    db.query("INSERT INTO employees (first_name, last_name, role_id, manager_id) VALUES (?,?,?,?);",[first_name, last_name, role_id, manager_id], function(err, result){
         if(err) throw err
-        console.table(result)
+        console.log("Added New Eemployee")
+        employeeDirectory()
     })
 })
 }
 const updateEmployeeRole = ()=>{
-    db.query("UPDATE employee SET = ? WHERE id = ?;", function(err, result){
+    inquirer
+  .prompt([
+    {
+      type: 'input',
+      message: `What is their new role ID number?`,
+      name: 'role_id',
+    },
+    {
+        type: 'input',
+        message: `What is their employee ID number?`,
+        name: 'id',
+    },
+    
+])
+.then (function({role_id, id}){
+    db.query("UPDATE employees SET role_id = ? WHERE id = ?;",[role_id, id], function(err, result){
         if(err) throw err
-        console.table(result)
+        console.log("Updated Employee")
+        employeeDirectory()
     })
+})
+
+    
 }
 
 const viewAllRoles = ()=>{
-    db.query("SELECT * from role", function(err, result){
+    db.query("SELECT * from roles", function(err, result){
         if(err) throw err
         console.table(result)
+        employeeDirectory()
     })
 }
 
@@ -117,12 +141,12 @@ inquirer
     {
       type: 'input',
       message: `What is the role title?`,
-      name: 'role_title',
+      name: 'title',
     },
     {
       type: 'input',
       message: `What is the role salary?`,
-      name: 'role_salary',
+      name: 'salary',
     },
     {
       type: 'input',
@@ -130,18 +154,20 @@ inquirer
       name: 'department_id',
     },
 ])
-.then (function({role_title, role_salary, department_id}){
-    db.query("INSERT INTO role VALUES(?,?,?)",[role_title, role_salary, department_id], function(err, result){
+.then (function({title, salary, department_id}){
+    db.query("INSERT INTO roles (title, salary, department_id) VALUES (?,?,?);",[title, salary, department_id], function(err, result){
         if(err) throw err
-        console.table(result)
+        console.log("Added New Role")
+        employeeDirectory()
         })
     })
  }
 
 const viewAllDepartments = ()=>{
-    db.query("SELECT * from department", function(err, result){
+    db.query("SELECT * from departments", function(err, result){
         if(err) throw err
         console.table(result)
+        employeeDirectory()
     })
 }
 
@@ -151,13 +177,14 @@ inquirer
     {
       type: 'input',
       message: `What is the department name?`,
-      name: 'department_name',
+      name: 'name',
     },
 ])
-.then (function({department_name}){
-    db.query("INSERT INTO department VALUES(?)",[department_name], function(err, result){
+.then (function({name}){
+    db.query("INSERT INTO departments (name) VALUES (?);",[name], function(err, result){
         if(err) throw err
-        console.table(result)
+        console.log("Added New Department")
+        employeeDirectory()
         })
     })
 }
