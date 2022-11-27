@@ -35,11 +35,11 @@ const employeeDirectory = ()=>{
         else if (data.choice === "Add Role"){
             addRole()
         }
-        else if (choice === "View All Departments"){
+        else if (data.choice === "View All Departments"){
             viewAllDepartments()
         }
         else if (data.choice === "Add Department"){
-            addDepartmet()
+            addDepartment()
         }
         else 
 
