@@ -2,7 +2,7 @@
 
 ## Description
 
-I created this project to work on creating schema and seeds then sourcing both to run prompts created in index.js. I was able to repeatedly use db_query to update or add information into my employee tracker and see that reflected.
+I created this project to work on creating schema and seeds then sourcing both to run prompts created in index.js. I was able to repeatedly use db_query to update or add information into my employee tracker and see that reflected. This gave me practice in refining my skills for backend development.
 
 ## Installation
 
