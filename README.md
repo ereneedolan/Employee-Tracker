@@ -10,7 +10,8 @@ N/A
 
 ## Usage
 
-N/A
+Here is a link to me walking through the project steps.
+Screen Recording: https://drive.google.com/file/d/1Mqhg24P82pyFwBFjjDM6vJFhVbAtj42S/view
 
 ## Credits
 
